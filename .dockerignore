@@ -1,0 +1,7 @@
+*.md
+!README.md
+LICENSE
+.git
+.gitignore
+.dockerignore
+deployments
