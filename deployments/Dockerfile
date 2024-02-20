@@ -1,4 +1,4 @@
-# docker build -t creativenarration -f ./deployments/Dockerfile --target development .
+# docker build -t ghcr.io/dmanias/creativenarration -f ./deployments/Dockerfile --target development .
 
 ARG GO_VERSION=1.21
 FROM golang:${GO_VERSION}-alpine AS development
@@ -9,7 +9,7 @@ COPY ../ ./
 RUN go mod download
 CMD ["go", "run", "./app/main.go"]
 
-# docker build -t creativenarration -f ./deployments/Dockerfile --target testing .
+# docker build -t ghcr.io/dmanias/creativenarration -f ./deployments/Dockerfile --target testing .
 FROM development AS testing
 RUN go test -v ./...
 
