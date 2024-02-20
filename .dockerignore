@@ -5,3 +5,7 @@ LICENSE
 .gitignore
 .dockerignore
 deployments
+skaffold.yaml
+.argo
+.github
+.pre-commit-config.yaml
