@@ -119,7 +119,7 @@ To get started with Skaffold, follow these steps:
 
 Install Skaffold: Ensure that Skaffold is installed on your local machine. You can find installation instructions for various platforms in the Skaffold documentation (<https://skaffold.dev/docs/install>).
 
-`skaffold dev` or `kaffold run --tail`
+`skaffold dev` or `skaffold run --tail`
 
 This command starts the Skaffold development loop, which continuously builds and deploys your application based on the configuration defined in skaffold.yaml.
 
