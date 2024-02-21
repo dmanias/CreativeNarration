@@ -16,6 +16,6 @@ RUN go test -v ./...
 FROM development AS build
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o creativenarration ./app/main.go
 
-FROM gcr.io/distroless/cc-debian11@sha256:8aad707f96620ee89e27febef51b01c6ff244277a3560fcfcfbe68633ef09193 as production
+FROM gcr.io/distroless/cc-debian12@sha256:899570acf85a1f1362862a9ea4d9e7b1827cb5c62043ba5b170b21de89618608 as production
 COPY --from=build /app/creativenarration /bin/creativenarration
 CMD ["/bin/creativenarration"]
