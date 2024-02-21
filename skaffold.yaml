@@ -1,0 +1,51 @@
+# This skaffold is used to deploy components of the backend in a shared context, meaning each component will use the staging environment for all external services.
+# All ingresses are disabled for these deployments to avoid rate limiting. Users can access their deployments though a port-foreword that's automatically created once deployed.
+# Examples:
+# skaffold run --tail
+# https://skaffold.dev/docs/install/
+---
+apiVersion: skaffold/v4beta6
+kind: Config
+metadata:
+  name: creative-narration
+profiles:
+  - name: creative-narration
+    activation: [{}] # Set as default profile
+    build:
+      local:
+        push: true
+      tagPolicy:
+        gitCommit: {}
+      artifacts:
+        - &build
+          image: ghcr.io/dmanias/creative-narration
+          context: .
+          docker:
+            target: development
+            dockerfile: deployments/Dockerfile
+    deploy:
+      kubeContext: ""
+      helm:
+        releases:
+          - &deploy
+            name: creative-narration
+            chartPath: deployments/chart
+            namespace: creative-narration
+            createNamespace: true
+            wait: false
+            valuesFiles:
+              - deployments/chart/values.yaml
+            setValues: {}
+            setValueTemplates:
+              imageCredentials:
+                username: "{{.GH_USERNAME}}"
+                password: "{{.GH_TOKEN}}"
+              image:
+                tag: "{{.IMAGE_TAG}}"
+    portForward:
+    - &port-forward
+      resourceType: service
+      resourceName: creative-narration
+      namespace: creative-narration
+      port: 80
+      localPort: 8080

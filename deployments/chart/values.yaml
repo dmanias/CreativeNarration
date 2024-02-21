@@ -10,6 +10,12 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
+imageCredentials:
+  registry: ghcr.io
+  username: ""
+  password: ""
+  email: ""
+
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""

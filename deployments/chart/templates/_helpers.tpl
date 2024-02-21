@@ -60,3 +60,23 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Create image pull secret
+*/}}
+{{- define "imagePullSecret" }}
+{{- with .Values.imageCredentials }}
+{{- printf "{\"auths\":{\"%s\":{\"username\":\"%s\",\"password\":\"%s\",\"email\":\"%s\",\"auth\":\"%s\"}}}" .registry .username .password .email (printf "%s:%s" .username .password | b64enc) | b64enc }}
+{{- end }}
+{{- end }}
+
+{{/*
+config secret name
+*/}}
+{{- define "creative-narration.configSecretName" -}}
+{{- if (eq "" .Values.config.existingSecret) }}
+{{- include "creative-narration.fullname" . }}-config
+{{- else }}
+{{- printf "%s" .Values.config.existingSecret }}
+{{- end }}
+{{- end }}

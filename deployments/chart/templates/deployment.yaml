@@ -20,8 +20,9 @@ spec:
       labels:
         {{- include "creative-narration.selectorLabels" . | nindent 8 }}
     spec:
-      {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
+        - name: {{ include "creative-narration.fullname" . }}-registrykey
+      {{- with .Values.imagePullSecrets }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
       serviceAccountName: {{ include "creative-narration.serviceAccountName" . }}
