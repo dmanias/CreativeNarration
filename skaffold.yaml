@@ -43,9 +43,15 @@ profiles:
               image:
                 tag: "{{.IMAGE_TAG}}"
     portForward:
-    - &port-forward
+    - &port-forward-http
       resourceType: service
       resourceName: creative-narration
       namespace: creative-narration
       port: 80
-      localPort: 8080
+      localPort: 3000
+    - &port-forward-debug
+      resourceType: pod
+      resourceName: creative-narration
+      namespace: creative-narration
+      port: 4000
+      localPort: 4000
