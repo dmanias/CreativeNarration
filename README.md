@@ -110,9 +110,35 @@ Review Output: If any of the hooks fail, pre-commit will prevent the commit from
 Configuration
 The configuration for pre-commit is defined in the .pre-commit-config.yaml file at the root of the repository. This file specifies the hooks that should be run and any additional configuration options.
 
-# Using Skaffold for Kubernetes Development
+# Using Helm for Kubernetes Deployment
+Helm helps you manage Kubernetes applications — Helm Charts help you define, install, and upgrade even the most complex Kubernetes application.
 
+# Using Skaffold for Kubernetes Development
 Skaffold is a command-line tool that facilitates Kubernetes development by automating the build, deployment, and testing process for your application. This README.md entry provides instructions on how to use Skaffold in your Kubernetes project.
+Install:
+  - Download your desired version: https://github.com/helm/helm/releases
+  - Unpack it (e.g. tar -zxvf helm-v3.0.0-linux-amd64.tar.gz)
+  - Find the helm binary in the unpacked directory, and move it to its desired destination (e.g. mv linux-amd64/helm /usr/local/bin/helm)
+
+Run Skaffold:
+`skaffold dev`
+  or
+`skaffold run --tail`
+
+# Pushing Docker Images to GitHub Container Registry (GHCR)
+To push Docker images to the GitHub Container Registry, you need to authenticate using a Personal Access Token (PAT) with the appropriate permissions. Follow these steps to create a PAT and log in to GHCR:
+
+## Creating a Personal Access Token (PAT) on GitHub
+1. Navigate to GitHub Settings: Go to your GitHub account settings, then to the "Developer settings" section.
+2. Personal Access Tokens: Select "Personal access tokens" and then "Generate new token".
+3. Token Permissions: When creating the token, ensure you select the write:packages, read:packages, and delete:packages scopes. If your repository is private, also select the repo scope.
+4. Generate Token: After selecting the appropriate permissions, generate the token and copy it. Important: Store your PAT securely, as you won't be able to view it again after leaving the generation page.
+
+## Logging in to GHCR Using Docker
+With your PAT, use the following command to authenticate Docker with the GitHub Container Registry.
+This enables you to push and pull images from GHCR:
+`echo $PAT | docker login ghcr.io -u YOUR_GITHUB_USERNAME --password-stdin`
+
 
 ## Getting Started
 

@@ -4,7 +4,7 @@ ARG GO_VERSION=1.21
 FROM golang:${GO_VERSION}-alpine AS development
 
 WORKDIR /app
-COPY ../ ./
+COPY . ./
 
 RUN go mod download
 CMD ["go", "run", "./app/main.go"]
@@ -16,6 +16,6 @@ RUN go test -v ./...
 FROM development AS build
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o creativenarration ./app/main.go
 
-FROM gcr.io/distroless/cc-debian12@sha256:899570acf85a1f1362862a9ea4d9e7b1827cb5c62043ba5b170b21de89618608 as production
+FROM gcr.io/distroless/cc-debian12@sha256:899570acf85a1f1362862a9ea4d9e7b1827cb5c62043ba5b170b21de89618608 AS production
 COPY --from=build /app/creativenarration /bin/creativenarration
 CMD ["/bin/creativenarration"]
