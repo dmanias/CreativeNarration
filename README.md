@@ -97,6 +97,7 @@ To get started with pre-commit, follow these steps:
 Install pre-commit: If you haven't already installed pre-commit, you can do so using pip:
 
 `pip install pre-commit`
+(If the package you're trying to install with pip is available in the Ubuntu repositories, it's recommended to install it using apt (e.g., sudo apt install python3-xyz). This ensures compatibility with your system's package management.)
 Install Hooks: After installing pre-commit, navigate to the root of the repository and run:
 
 `pre-commit install`
