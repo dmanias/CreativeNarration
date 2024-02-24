@@ -139,7 +139,6 @@ With your PAT, use the following command to authenticate Docker with the GitHub 
 This enables you to push and pull images from GHCR:
 `echo $PAT | docker login ghcr.io -u YOUR_GITHUB_USERNAME --password-stdin`
 
-
 ## Getting Started
 
 To get started with Skaffold, follow these steps:
