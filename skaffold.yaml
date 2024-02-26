@@ -7,9 +7,9 @@
 apiVersion: skaffold/v4beta6
 kind: Config
 metadata:
-  name: creative-narration
+  name: creativenarration
 profiles:
-  - name: creative-narration
+  - name: creativenarration
     activation: [{}] # Set as default profile
     build:
       local:
@@ -18,7 +18,7 @@ profiles:
         gitCommit: {}
       artifacts:
         - &build
-          image: ghcr.io/dmanias/creative-narration
+          image: ghcr.io/dmanias/creativenarration
           context: .
           docker:
             target: development
@@ -28,9 +28,9 @@ profiles:
       helm:
         releases:
           - &deploy
-            name: creative-narration
+            name: creativenarration
             chartPath: deployments/chart
-            namespace: creative-narration
+            namespace: creativenarration
             createNamespace: true
             wait: false
             valuesFiles:
@@ -45,13 +45,13 @@ profiles:
     portForward:
     - &port-forward-http
       resourceType: service
-      resourceName: creative-narration
-      namespace: creative-narration
+      resourceName: creativenarration-creative-narration
+      namespace: creativenarration
       port: 80
       localPort: 3000
-    - &port-forward-debug
-      resourceType: pod
-      resourceName: creative-narration
-      namespace: creative-narration
-      port: 4000
-      localPort: 4000
+#    - &port-forward-debug
+#      resourceType: deployment
+#      resourceName: creativenarration-creative-narration
+#      namespace: creativenarration
+#      port: 4000
+#      localPort: 4000

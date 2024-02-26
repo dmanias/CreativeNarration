@@ -9,6 +9,7 @@ LICENSE
 .pre-commit-config.yaml
 deployments
 skaffold.yaml
+.env
 
 # Ignore common directories
 .idea/
